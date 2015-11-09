@@ -17,17 +17,25 @@ public class TicketMachine
     private int balance;
     // The total amount of money collected by this machine.
     private int total;
+    //Se aplica descuento o no (true o false).
+    private boolean condescuento;
+    //Se pide el porcentaje de descuento.
+    private int porCiento;
 
     /**
-     * Create a machine that issues tickets of the given price.
+     * Crea una máquina de tickets a la que ponemos el precio del ticket
+     * y si hace descuentos en algún ticket.
      */
-    public TicketMachine(int cost)
+    public TicketMachine (int cost, boolean discount, int porcent)
     {
         price = cost;
         balance = 0;
         total = 0;
+        condescuento = discount;
+        porCiento = porcent;
+        
     }
-
+     
     /**
      * @Return The price of a ticket.
      */
@@ -82,8 +90,9 @@ public class TicketMachine
             balance = balance - price;
         }
         else {
+            int amountLeftToPay = price - balance;
             System.out.println("You must insert at least: " +
-                               (price - balance) + " more cents.");
+                               (amountLeftToPay) + " more cents.");
                     
         }
     }
@@ -100,13 +109,22 @@ public class TicketMachine
         return amountToRefund;
     }
     
+    /**
+     * Método para vaciar la máquina.
+     */
     public int emptyMachine()
     {
-        int vaciarMaquina;
-        vaciarMaquina = balance + total;
-        total = 0;
-        return vaciarMaquina;
-        
-       
+        int recaudacion = -1;
+        if (balance ==0){
+            recaudacion = total;
+            total = 0;
+        }
+      
+            return recaudacion;
     }
-}
+    
+    }
+ 
+    
+
+ 
