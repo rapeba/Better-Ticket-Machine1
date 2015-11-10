@@ -18,7 +18,7 @@ public class TicketMachine
     // The total amount of money collected by this machine.
     private int total;
     //Se aplica descuento o no (true o false).
-    private boolean condescuento;
+    private boolean descontar;
     //Se pide el porcentaje de descuento.
     private int porCiento;
 
@@ -31,7 +31,7 @@ public class TicketMachine
         price = cost;
         balance = 0;
         total = 0;
-        condescuento = discount;
+        descontar = discount;
         porCiento = porcent;
         
     }
@@ -89,7 +89,7 @@ public class TicketMachine
             // Reduce the balance by the prince.
             balance = balance - price;
         }
-        else {
+        else{
             int amountLeftToPay = price - balance;
             System.out.println("You must insert at least: " +
                                (amountLeftToPay) + " more cents.");
@@ -115,7 +115,7 @@ public class TicketMachine
     public int emptyMachine()
     {
         int recaudacion = -1;
-        if (balance ==0){
+        if (balance == 0){
             recaudacion = total;
             total = 0;
         }
@@ -123,8 +123,30 @@ public class TicketMachine
             return recaudacion;
     }
     
+    public void printTicketWithDiscount()
+    {
+        int rebajado = price - (price*porCiento / 100);
+        if (descontar == true){
+            //Imprime el ticket.
+            System.out.println("##################");
+            System.out.println("# The blueJ Line");
+            System.out.println("# Ticket");
+            System.out.println("#Con descuento");
+            System.out.println("# " + rebajado + " cents.");
+            System.out.println("##################");
+            System.out.println();
+        }
+    
+        
+        else
+           {
+            System.out.println("#########################");
+            System.out.println("## No hay descuento en ##");
+            System.out.println("##     el tickect      ##");
+            System.out.println("#########################");
+        }
     }
- 
+}
     
 
  
